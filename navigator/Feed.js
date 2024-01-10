@@ -1,32 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import Login from '../screens/auth/Login';
-import Signup from '../screens/auth/Signup';
 import UserFeed from '../screens/Feed/UserFeed';
-import { Text,Button,Alert, Pressable } from 'react-native';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+import { Text, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import AddPost from '../screens/Feed/AddPost';
 import EditPost from '../screens/Feed/EditPost';
-import { useState } from 'react';
-import { getUserDetail } from '../storage/storage';
 const Stack = createStackNavigator();
 
-const  Navigation = () => {
-  const navigation = useNavigation()
-  const [initialRouteName,setInitialRouteName] = useState('Signup')
-  
-  const focused = useIsFocused()
-  if(focused){
-    async function getDetail(){
-      const res = await getUserDetail()
-      console.log("hi,",res)
-    }
-    getDetail()
-  }
-
-  return (
-    <Stack.Navigator
-    initialRouteName={initialRouteName}
-    >
+const Feed = () =>{
+    const navigation = useNavigation()
+return <Stack.Navigator>
       <Stack.Screen name="Feed" component={UserFeed}
         options={{
           headerStyle:{
@@ -42,16 +24,7 @@ const  Navigation = () => {
           ),
         }}
       />
-      <Stack.Screen name="Login" component={Login}
-      options={{
-        headerShown:false
-      }}
-      />
-      <Stack.Screen name="Signup" component={Signup}
-        options={{
-          headerShown:false
-        }}
-      />
+
       <Stack.Screen name="AddPost" component={AddPost}
         options={{
           headerShown:false
@@ -62,8 +35,7 @@ const  Navigation = () => {
           headerShown:false
         }}
       />
-    </Stack.Navigator>
-  );
+</Stack.Navigator>
 }
 
-export default Navigation
+export default Feed

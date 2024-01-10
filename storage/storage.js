@@ -81,7 +81,7 @@ export const deletePost = async (id) =>{
         return "Delete Post"
 
     } catch (error) {
-        Alert.alert("Error",error);      
+        Alert.alert("Error",error.message);      
     }
 }
 

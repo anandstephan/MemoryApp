@@ -32,10 +32,19 @@ import shortid from "shortid";
   
       // function for handling User Registeration
       const editMemory = async () => {
-      const res =    await resavePost(params.id,title,body,selectedImage) 
-        if(res==='Memory Updated'){
-          Alert.alert("Message","Congratulation, You're Successfully Edit Memory",[{text:"OK",onPress:()=>navigation.navigate('Feed')}])
+        if(title.length===0){
+            Alert.alert("Title","Please Fill the Title")
+        }else if(body.length===0){
+            Alert.alert("Body","Please Fill the Body")
+        }else if(selectedImage ===null || selectedImage.length === 0){
+            Alert.alert("Image","Please Select the Image")
+        }else{
+            const res = await resavePost(params.id,title,body,selectedImage) 
+            if(res==='Memory Updated'){
+              Alert.alert("Message","Congratulation, You're Successfully Edit Memory",[{text:"OK",onPress:()=>navigation.navigate('Feed')}])
+            }
         }
+      
     };
       const uploadPic = async () =>{
         const result = await ImagePicker.launchImageLibrary({

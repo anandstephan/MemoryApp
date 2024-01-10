@@ -13,7 +13,16 @@ const PostCard = ({title,body,img,id}) =>{
     const onDeletePost = async (id) =>{
         Alert.alert("Delete","Are you sure you want to delete",[{
             text:"Ok",
-            onPress:()=>deletePost(id)
+            onPress:()=>{
+                async function Delete(){
+                    const res= await deletePost(id)
+                    console.log("kkk",res)
+                    if(res === "Delete Post"){
+                        navigation.navigate('Feed')
+                    }
+                }
+                Delete()
+            }
         },{
             text:'Cancel',
             onPress:()=>{}

@@ -21,12 +21,19 @@ import { login } from "../../storage/storage";
     const navigation = useNavigation()
 
     const handleLogin = async () => {
-         const res = await login(email,password)
-         if(res === "There is no User yet please signup first"){
-            Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Signup")}]);
-         }else if(res === "You're Successfully Login"){
-            Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Feed")}]);
-         }
+        if(email.length===0){
+          Alert.alert("Email","Please Fill the Email Field")
+        }else if(password.length==0){
+          Alert.alert("Password","Please Fill the Password")
+        }else{
+          const res = await login(email,password)
+          if(res === "There is no User yet please signup first"){
+             Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Signup")}]);
+          }else if(res === "You're Successfully Login"){
+             Alert.alert("Message",res,[{text:'Ok',onPress:()=>navigation.navigate("Feed")}]);
+          }
+        }
+
     };
   
     return (

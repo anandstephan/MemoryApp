@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState,useCallback } from "react"
 import { Dimensions, FlatList,Text,View,Image,StyleSheet } from "react-native"
 import { getMemories } from "../../storage/storage"
 import PostCard from "./components/PostCard"
+import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 
 const UserFeed = () =>{
 
     const [memories,setMemories]= useState([])
-
-    useEffect(()=>{
+    const [renderItem,setrenderItem] = useState(false)
+    
+    const focused = useIsFocused()
+    if(focused){
         async function getData(){
-           const res =  await getMemories()
-            setMemories(res)
-        }
-        getData()
-    },[])
+            const res =  await getMemories()
+             setMemories(res)
+         }
+         getData()        
+    }
 
+    
 
 return <FlatList
 data={memories}

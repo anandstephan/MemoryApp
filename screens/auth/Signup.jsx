@@ -24,13 +24,27 @@ import shortid from "shortid";
     const [selectedImage, setSelectedImage] = useState(null);
     const navigation = useNavigation()
 
-  
       // function for handling User Registeration
       const handleRegister = async () => {
-      const res =    await signup(shortid.generate(), name,email,password,selectedImage) 
-        if(res==='User Added Successfully'){
-          Alert.alert("Message","Congratulation, You're Successfully Added, Please Login Now",[{text:"OK",onPress:()=>navigation.navigate('Login')}])
+        console.log("sel",selectedImage)
+  
+        if(name.length==0){
+          Alert.alert("Name","Please Fill the Name Field")          
         }
+        else if(selectedImage===null || selectedImage.length==0){
+          Alert.alert("Image","Please Selected Image")
+        }
+        else if(email.length===0){
+          Alert.alert("Email","Please Fill the Email Field")
+        }else if(password.length==0){
+          Alert.alert("Password","Please Fill the Password")
+        }else{
+          const res =    await signup(shortid.generate(), name,email,password,selectedImage) 
+          if(res==='User Added Successfully'){
+            Alert.alert("Message","Congratulation, You're Successfully Added, Please Login Now",[{text:"OK",onPress:()=>navigation.navigate('Login')}])
+          }
+        }
+
     };
       const uploadPic = async () =>{
         const result = await ImagePicker.launchImageLibrary({
@@ -104,7 +118,7 @@ import shortid from "shortid";
   
           
   
-              <Button title="Upload Image" color={"#333"} onPress={uploadPic} />
+              {selectedImage ? <Image source={{uri:selectedImage}} style={styles.imgFile}/> :   <Button title="Upload Image" color={"#333"} onPress={uploadPic} />}
             </View>
   
             <Pressable
@@ -187,5 +201,12 @@ import shortid from "shortid";
       fontWeight: "bold",
       textAlign: "center",
     },
+    imgFile:{
+      width:200,
+      height:200,
+      marginBottom:20,
+      borderRadius:100,
+      marginLeft:40
+  }
   });
   
