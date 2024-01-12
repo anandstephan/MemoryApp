@@ -59,6 +59,14 @@ export const getUserDetail = async () =>{
     }
 }
 
+export const deleteUserDetail = async () =>{
+    try {
+        await AsyncStorage.removeItem('userDetail')
+    } catch (error) {
+        Alert.alert("Error",error.message);      
+    }
+}
+
 export const getMemories = async () =>{
     try {
         const response = await AsyncStorage.getItem("memories")

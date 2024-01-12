@@ -170,10 +170,7 @@ import { login } from "../../storage/storage";
       fontWeight: "700",
       textAlign: "center",
     },
-    registerContainer: {
-      marginTop: 15,
-     marginLeft:-30
-    },
+ 
     registerUserStyle: {
       color: "gray",
       fontSize: 15,

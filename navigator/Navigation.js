@@ -6,7 +6,7 @@ import { Text,Button,Alert, Pressable } from 'react-native';
 import { useIsFocused, useNavigation } from '@react-navigation/native';
 import AddPost from '../screens/Feed/AddPost';
 import EditPost from '../screens/Feed/EditPost';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserDetail } from '../storage/storage';
 const Stack = createStackNavigator();
 
@@ -16,12 +16,16 @@ const  Navigation = () => {
   
   const focused = useIsFocused()
   if(focused){
+
+  }
+  useEffect(()=>{
     async function getDetail(){
       const res = await getUserDetail()
       console.log("hi,",res)
+      setInitialRouteName('Feed')
     }
     getDetail()
-  }
+  },[])
 
   return (
     <Stack.Navigator
